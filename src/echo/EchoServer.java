@@ -16,7 +16,7 @@ public class EchoServer {
 
 	public static void main(String[] args) {
 		ServerSocket serverSocket = null;
-
+				
 		try {
 			serverSocket = new ServerSocket();
 			InetAddress inetAddress = InetAddress.getLocalHost();
@@ -42,7 +42,7 @@ public class EchoServer {
 					break;
 				}
 
-				System.out.println("수신 : " + str);
+				System.out.println("Received : " + str);
 
 				pw.println(str);
 			}
