@@ -9,7 +9,7 @@ public class InetAddressTest {
 		try {
 	         InetAddress inetAddress = InetAddress.getLocalHost();
 	         
-	         String hostname = inetAddress.getHostName();
+	         String hostname = inetAddress.getHostName(); // 컴퓨터 이름
 	         String hostaddress = inetAddress.getHostAddress();
 	         
 	         
