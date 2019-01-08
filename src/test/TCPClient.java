@@ -27,7 +27,7 @@ public class TCPClient {
 			OutputStream os = socket.getOutputStream();
 			
 			// 4. 데이터 쓰기
-			String data = "Hello World\n";
+			String data = "Hello World\n"; // 항상 개행을 붙여서 해야함 - 보낼때는 항상 개행을 붙여야함
 			os.write(data.getBytes("UTF-8"));
 			
 			// 5. 데이터 받기
