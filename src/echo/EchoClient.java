@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.Scanner;
 
 public class EchoClient {
@@ -35,6 +36,7 @@ public class EchoClient {
 			while (true) {
 				System.out.print(">> ");
 				String input = sc.nextLine();
+				
 				pw.println(input);
 				
 				if(input.equals("exit")) {
@@ -43,10 +45,20 @@ public class EchoClient {
 				}
 
 				String str = br.readLine();
+				
+				if(str == null) {
+					System.out.println("연결종료");
+					return;
+				}
+				
 				System.out.println("<< " + str);
+				
 			}
 
-		} catch (IOException e) {
+		} catch(SocketException e) {
+			System.out.println("서버 비정상 종료");
+		}
+		catch (IOException e) {
 			e.printStackTrace();
 		} finally {
 			try {

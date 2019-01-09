@@ -8,10 +8,11 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.SocketException;
 
 public class EchoServerReceiveThread extends Thread {
 	private Socket socket;
-	
+
 	public EchoServerReceiveThread(Socket socket) {
 		this.socket = socket;
 	}
@@ -19,7 +20,7 @@ public class EchoServerReceiveThread extends Thread {
 	@Override
 	public void run() {
 		InetSocketAddress inetRemoteSocketAddress = (InetSocketAddress) socket.getRemoteSocketAddress();
-		log("connected by client[" + inetRemoteSocketAddress.getAddress().getHostAddress() + ":"
+		log("클라이언트 연결[" + inetRemoteSocketAddress.getAddress().getHostAddress() + ":"
 				+ inetRemoteSocketAddress.getPort() + "]");
 
 		try {
@@ -41,12 +42,23 @@ public class EchoServerReceiveThread extends Thread {
 
 				pw.println(str);
 			}
-		} catch (IOException e) {
+		} catch(SocketException e) {
+			System.out.println("클라이언트 비정상 종료");
+		}
+		catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (socket != null && !socket.isClosed()) {
+					socket.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 
 	}
-	
+
 	public static void log(String log) {
 		System.out.println("[server#" + Thread.currentThread().getId() + "]" + log);
 	}

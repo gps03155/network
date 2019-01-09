@@ -20,8 +20,8 @@ public class EchoServer {
 
 			while (true) { // 클라이언트 연결을 계속 받기 위해 무한 루프
 				Socket socket = serverSocket.accept(); // thread 써야함
-				System.out.println("클라이언트 연결");
-
+				System.out.println("Server Accept");
+				
 				Thread thread = new EchoServerReceiveThread(socket); // 다중 접속을 위한 thread 사용 - thread 생성자에 socket을 넘겨줌
 				thread.start();
 			}
