@@ -1,11 +1,9 @@
 package thread;
 
-public class MultithreadEx01 {
+public class AlphabeticThread extends Thread {
 
-	public static void main(String[] args) {
-		Thread digiThread = new DigitTread();
-		digiThread.start();
-		
+	@Override
+	public void run() {
 		try {
 			// main 스레드는 선점이라서 한번 선점하면 계속 실행됨
 			for (char c = 'a'; c <= 'z'; c++) {
@@ -18,4 +16,5 @@ public class MultithreadEx01 {
 			e.printStackTrace();
 		}
 	}
+
 }
