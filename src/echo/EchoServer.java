@@ -1,50 +1,29 @@
 package echo;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.net.*;
 
 public class EchoServer {
 	private static final int PORT = 6000;
 
 	public static void main(String[] args) {
 		ServerSocket serverSocket = null;
-				
+
 		try {
 			serverSocket = new ServerSocket();
+
 			InetAddress inetAddress = InetAddress.getLocalHost();
 			String localhost = inetAddress.getHostAddress();
 
 			serverSocket.bind(new InetSocketAddress(localhost, PORT));
-			System.out.println("서버 바인딩");
+			System.out.println("서버 바인딩 : " + localhost);
 
-			Socket socket = serverSocket.accept();
-			System.out.println("클라이언트 연결");
+			while (true) { // 클라이언트 연결을 계속 받기 위해 무한 루프
+				Socket socket = serverSocket.accept(); // thread 써야함
+				System.out.println("클라이언트 연결");
 
-			InputStream is = socket.getInputStream();
-			BufferedReader br = new BufferedReader(new InputStreamReader(is, "utf-8"));
-
-			OutputStream os = socket.getOutputStream();
-			PrintWriter pw = new PrintWriter(os, true);
-
-			while (true) {
-				String str = br.readLine();
-				
-				if(str == null) {
-					System.out.println("연결 종료");
-					break;
-				}
-
-				System.out.println("Received : " + str);
-
-				pw.println(str);
+				Thread thread = new EchoServerReceiveThread(socket); // 다중 접속을 위한 thread 사용 - thread 생성자에 socket을 넘겨줌
+				thread.start();
 			}
 
 		} catch (IOException e) {
