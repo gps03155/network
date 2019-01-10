@@ -25,7 +25,7 @@ public class ChatServer {
 				System.out.println("클라이언트 접속");
 				System.out.println("현재 클라이언트 접속 수 : " + ++count);
 				
-				new ChatServerThread(socket, listwriters).start();
+				new ChatServerThread(socket,	 listwriters).start();
 			}
 
 		} catch (Exception e) {

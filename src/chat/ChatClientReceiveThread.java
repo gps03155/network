@@ -1,16 +1,27 @@
 package chat;
 
-import java.io.*;
-import java.net.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.Socket;
+import java.net.SocketException;
+
+import chat.client.win.ChatWindow;
 
 public class ChatClientReceiveThread extends Thread {
 	private Socket socket;
 	private BufferedReader br;
-
+	private ChatWindow cw;
+	
 	public ChatClientReceiveThread(Socket socket) {
 		this.socket = socket;
+	}	
+	
+	public ChatClientReceiveThread(Socket socket, ChatWindow cw) {
+		this.socket = socket;
+		this.cw = cw;
 	}
-
+	
 	@Override
 	public void run() {
 		try {
@@ -31,7 +42,7 @@ public class ChatClientReceiveThread extends Thread {
 				}
 			}
 		} catch (SocketException e) {
-			System.out.println("클라이언트 종료");
+			System.out.println("클라이언트 종료" + e.getMessage());
 		}
 
 		catch (IOException e) {
