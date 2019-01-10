@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class EchoClient {
 	private static final String IP = "192.168.56.1";
-	private static final int PORT = 6000;
+	private static final int PORT = 5000;
 
 	public static void main(String[] args) {
 		Socket socket = null;
