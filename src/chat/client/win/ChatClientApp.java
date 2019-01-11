@@ -50,15 +50,16 @@ public class ChatClientApp {
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-		} finally {
-			try {
-				if (socket != null && !socket.isClosed()) {
-					socket.close();
-				}
-			} catch (IOException e) {
-				System.out.println(e.getMessage());
-			}
-		}
+		} 
+//		finally {
+//			try {
+//				if (socket != null && !socket.isClosed()) {
+//					socket.close();
+//				}
+//			} catch (IOException e) {
+//				System.out.println(e.getMessage());
+//			}
+//		}
 	}
 
 }

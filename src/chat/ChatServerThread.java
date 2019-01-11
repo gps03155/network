@@ -55,14 +55,14 @@ public class ChatServerThread extends Thread {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		} finally {
 			try {
 				if (socket != null && !socket.isClosed()) {
 					socket.close();
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				System.out.println(e.getMessage());
 			}
 		}
 	}
