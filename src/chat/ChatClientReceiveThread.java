@@ -8,6 +8,7 @@ import java.net.SocketException;
 
 import chat.client.win.ChatWindow;
 
+
 public class ChatClientReceiveThread extends Thread {
 	private Socket socket;
 	private BufferedReader br;
@@ -15,11 +16,13 @@ public class ChatClientReceiveThread extends Thread {
 	
 	public ChatClientReceiveThread(Socket socket) {
 		this.socket = socket;
-	}	
+	}			
 	
 	public ChatClientReceiveThread(Socket socket, ChatWindow cw) {
 		this.socket = socket;
 		this.cw = cw;
+		
+		cw.show();
 	}
 	
 	@Override
@@ -30,7 +33,7 @@ public class ChatClientReceiveThread extends Thread {
 			while (true) {
 				String data = br.readLine();
 
-				if (data == null) {
+				if (data == null) {	
 					System.out.println("연결종료");
 					break;
 				}

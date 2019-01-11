@@ -1,5 +1,5 @@
-package chat.client.win;
 
+package chat.win;
 import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Color;
@@ -13,10 +13,10 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.BufferedReader;
 import java.io.PrintWriter;
 
 public class ChatWindow {
+
 	private Frame frame;
 	private Panel pannel;
 	private Button buttonSend;
@@ -97,7 +97,9 @@ public class ChatWindow {
 		    	  printwriter.println( "message:" + message);
 		    	  textField.setText("");
 		  		  textField.requestFocus();
-		      }	
+		      }
+		   
+		
 	}
 	
 	public void receiveMessage(String message) {
@@ -106,4 +108,5 @@ public class ChatWindow {
 		textArea.append("\n");
 		
 	}
+	
 }

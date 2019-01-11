@@ -27,7 +27,7 @@ public class ChatServerThread extends Thread {
 
 			while (true) {
 				String request = br.readLine();
-				System.out.println(request);
+				System.out.println("[server] : " + request);
 
 				if (request == null) {
 					System.out.println("클라이언트 연결 종료");
@@ -68,7 +68,7 @@ public class ChatServerThread extends Thread {
 	}
 
 	// 본인 닉네임 제외하고 다른 사람이 들어왔을 경우 들어왔다고 알려줌
-	public void doJoin(String nickName, Writer writer) {
+	private void doJoin(String nickName, Writer writer) {
 		this.nickname = nickName;
 
 		pw.println("join:ok");
@@ -80,13 +80,13 @@ public class ChatServerThread extends Thread {
 		addWriter(writer);
 	}
 
-	public void addWriter(Writer writer) {
+	private void addWriter(Writer writer) {
 		synchronized (listwriters) {
 			listwriters.add(writer);
 		}
 	}
 
-	public void broadcast(String data) {
+	private void broadcast(String data) {
 		synchronized (listwriters) {
 			for (Writer writer : listwriters) {
 				PrintWriter printWriter = (PrintWriter) writer;
@@ -96,18 +96,18 @@ public class ChatServerThread extends Thread {
 		}
 	}
 
-	public void doMessage(String message) {
+	private void doMessage(String message) {
 		broadcast("[" + nickname + "] : " + message);
 	}
 
-	public void doQuit(Writer writer) {
+	private void doQuit(Writer writer) {
 		removeWriter(writer);
 
 		String data = nickname + "님이 퇴장하였습니다.";
 		broadcast(data);
 	}
 
-	public void removeWriter(Writer writer) {
+	private void removeWriter(Writer writer) {
 		synchronized (listwriters) {
 			listwriters.remove(writer);
 		}
