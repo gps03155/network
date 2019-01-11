@@ -48,6 +48,7 @@ public class ChatClientApp {
 
 			new ChatClientReceiveThread(socket, cw).start();
 			
+			cw.show();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} 

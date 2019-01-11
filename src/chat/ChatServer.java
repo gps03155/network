@@ -16,6 +16,9 @@ public class ChatServer {
 			serverSocket = new ServerSocket();
 			listwriters = new ArrayList<Writer>();
 			
+			// 1-1 set option SO_REUSEADDR (종료 후 빨리 바인딩을 하기 위해서)
+			serverSocket.setReuseAddress(true);
+			
 			String hostname = InetAddress.getLocalHost().getHostAddress();
 			serverSocket.bind(new InetSocketAddress(hostname, PORT));
 			System.out.println("서버 바인딩");

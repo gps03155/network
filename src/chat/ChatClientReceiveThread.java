@@ -21,8 +21,6 @@ public class ChatClientReceiveThread extends Thread {
 	public ChatClientReceiveThread(Socket socket, ChatWindow cw) {
 		this.socket = socket;
 		this.cw = cw;
-		
-		cw.show();
 	}
 	
 	@Override
@@ -41,6 +39,7 @@ public class ChatClientReceiveThread extends Thread {
 				if (data.equals("join:ok")) {
 					continue;
 				} else {
+					cw.receiveMessage(data);
 					System.out.println(data);
 				}
 			}
