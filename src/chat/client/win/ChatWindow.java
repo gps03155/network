@@ -90,6 +90,7 @@ public class ChatWindow {
 			textField.setText("");
 			textField.requestFocus();
 
+			System.exit(0);
 		} else {
 			printwriter.println("message:" + message);
 			textField.setText("");
